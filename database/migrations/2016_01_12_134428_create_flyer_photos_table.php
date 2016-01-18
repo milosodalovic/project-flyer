@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateFlyerPhotosTable extends Migration
 {
@@ -15,7 +16,10 @@ class CreateFlyerPhotosTable extends Migration
         Schema::create('flyer_photos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('flyer_id')->unsigned();
+
+            $table->string('name');
             $table->string('path');
+            $table->string('thumbnail_path');
             $table->foreign('flyer_id')->references('id')->on('flyers')->onDelete('cascade');
             $table->timestamps();
         });
