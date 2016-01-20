@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class Flyer extends Model
 {
 
@@ -33,9 +35,13 @@ class Flyer extends Model
 
     }
 
+    /**
+     * @param Photo $photo
+     * @return Model
+     */
     public function addPhoto(Photo $photo)
     {
-        $this->photos()->save($photo);
+        return $this->photos()->save($photo);
     }
 
     /**
@@ -45,6 +51,25 @@ class Flyer extends Model
     public function photos()
     {
         return $this->hasMany('App\Photo');
+    }
+
+    /**
+     * Flyer is owned by an user
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function owner()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
+
+    /**
+     * Determine if the given user has created a flyer
+     * @param User $user
+     * @return bool
+     */
+    public function ownedBy(User $user)
+    {
+        return $this->user_id == $user->id;
     }
 
 

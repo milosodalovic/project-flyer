@@ -11,7 +11,12 @@
             Use it as a starting point to create something more unique.
         </p>
 
-        <a class="btn btn-primary btn-lg" href="/flyers/create" role="button">Create a Flyer »</a>
+        @if($signedIn)
+            <a class="btn btn-primary btn-lg" href="/flyers/create" role="button">Create a Flyer »</a>
+        @else
+            <a class="btn btn-primary btn-lg" href="/register" role="button">SignUp »</a>
+        @endif
+
 
     </div>
 </div>

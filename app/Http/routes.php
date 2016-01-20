@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages/home');
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +26,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     Route::resource('flyers','FlyersController');
     Route::get('{zip}/{street}', 'FlyersController@show');
-    Route::post('{zip}/{street}/photos','FlyersController@addPhoto');
+    Route::post('{zip}/{street}/photos','PhotosController@store');
 //    Route::post('{zip}/{street}/photos', [ 'as' => 'store_photo_path', 'uses' => 'FlyersController@addPhoto']);
 
 
@@ -38,6 +35,6 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-
+    Route::get('/', 'PagesController@home');
     Route::get('/home', 'HomeController@index');
 });
