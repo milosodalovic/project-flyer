@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -50,4 +51,13 @@ class Photo extends Model
         return $this->belongsTo('App\Flyer');
     }
 
+    public function delete()
+    {
+        File::delete([
+            $this->path,
+            $this->thumbnail_path
+        ]);
+
+        parent::delete();
+    }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\AddPhotoRequest;
 
 use App\Http\Controllers\Controller;
+use App\Photo;
 
 class PhotosController extends Controller
 {
@@ -25,6 +26,13 @@ class PhotosController extends Controller
         $photo = $request->file('photo');
 
         (new AddPhotoToFlyer($flyer,$photo))->save();
+    }
+
+    public function destroy($id)
+    {
+        Photo::findOrFail($id)->delete();
+
+        return back();
     }
 
 }

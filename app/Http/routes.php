@@ -23,6 +23,8 @@
 |
 */
 
+use App\Http\Controllers\PhotosController;
+
 Route::group(['middleware' => ['web']], function () {
     Route::resource('flyers','FlyersController');
     Route::get('{zip}/{street}', 'FlyersController@show');
@@ -37,4 +39,5 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::get('/', 'PagesController@home');
     Route::get('/home', 'HomeController@index');
+    Route::delete('photos/{id}', 'PhotosController@destroy');
 });
